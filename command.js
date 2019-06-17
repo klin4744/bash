@@ -1,4 +1,5 @@
 const fs = require('fs');
+const request = require('request');
 module.exports.pwd = () => {
   process.stdout.write(process.argv[1]);
   process.stdout.write('\nprompt > ');
@@ -75,6 +76,13 @@ module.exports.wc = args => {
     );
     process.stdout.write('\nprompt > ');
   });
+};
+module.exports.curl = args => {
+  request(args, function(err, response, body) {
+    if (err) throw err;
+    process.stdout.write(body);
+  });
+  process.stdout.write('\nprompt > ');
 };
 // if (cmd === 'pwd') {
 //     process.stdout.write(process.argv[1]);
