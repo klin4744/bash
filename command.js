@@ -54,6 +54,28 @@ module.exports.tail = args => {
     process.stdout.write('\nprompt > ');
   });
 };
+module.exports.sort = args => {
+  fs.readFile(args, 'UTF-8', function(err, file) {
+    if (err) throw err;
+    let sortedFile = file
+      .toString()
+      .split('\n')
+      .sort()
+      .join('\n');
+    process.stdout.write(sortedFile);
+    process.stdout.write('\nprompt > ');
+  });
+};
+module.exports.wc = args => {
+  fs.readFile(args, 'UTF-8', function(err, file) {
+    if (err) throw err;
+    const length = file.toString().split('\n').length;
+    process.stdout.write(
+      `There are ${length} lines and ${file.toString().length} characters`,
+    );
+    process.stdout.write('\nprompt > ');
+  });
+};
 // if (cmd === 'pwd') {
 //     process.stdout.write(process.argv[1]);
 //   } else if (cmd === 'date') {
